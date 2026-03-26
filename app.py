@@ -6,11 +6,11 @@ from google.genai import types
 # 🔴 BOTÓN ROJO PARA MODO CLARO
 os.environ["GRADIO_THEME"] = "light"
 
-# 1. API Key segura (Si la pones en la nube, la lee de ahí. Si no, usa la tuya aquí)
+# 1. API Key segura
 api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyA7LjsUxnnCM-IsnTDcHrg0ZXKkxysH6iM")
 client = genai.Client(api_key=api_key)
 
-# 2. Instrucciones (El cerebro)
+# 2. Instrucciones
 system_instruction = """
 Sei "Pazienza IA", un assistente tecnico progettato esclusivamente per gli anziani. 
 La tua personalità è estremamente paziente, calorosa, rispettosa e incoraggiante. 
@@ -32,19 +32,19 @@ def responder(mensaje, historial):
     response = chat.send_message(mensaje)
     return response.text
 
-# 3. CSS para achicar la pantalla y forzar el blanco
+# 3. 
 css_final = """
 /* Fondo general */
 body, :root { background-color: #FFF9F2 !important; }
 
-/* 🔥 AQUÍ ESTÁ LA MAGIA: Centrar y hacer más estrecha la aplicación */
+/*  Centrar y hacer más estrecha la aplicación */
 #app-container {
     max-width: 800px !important; 
     margin: 0 auto !important; 
     padding-top: 20px;
 }
 
-/* Forzar el fondo BLANCO en el chat para matar la caja negra */
+/* Forzar fondo blanco */
 .chatbot, .block {
     background-color: #FFFFFF !important; 
     border-radius: 20px !important;
@@ -62,7 +62,7 @@ footer, .svelte-1gfknrx { display: none !important; }
 # 4. Interfaz centrada
 with gr.Blocks(css=css_final, theme=gr.themes.Soft(primary_hue="orange")) as demo:
     
-    # Envolvemos TODO en una columna estrecha centrada
+    # Columna estrecha centrada
     with gr.Column(elem_id="app-container"):
         gr.HTML(
             """
@@ -74,9 +74,9 @@ with gr.Blocks(css=css_final, theme=gr.themes.Soft(primary_hue="orange")) as dem
         )
         gr.ChatInterface(fn=responder)
 
-# js para forzar modo claro al abrir
+#  modo claro
 js_claro = "function() { document.body.classList.remove('dark'); }"
 
 if __name__ == "__main__":
-    # Quitamos el share=True que da error. Solo lo probamos localmente.
+    # Prueba local
     demo.launch(share=True, js=js_claro)
