@@ -7,7 +7,11 @@ from google.genai import types
 os.environ["GRADIO_THEME"] = "light"
 
 # 1. API Key segura
-api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyA7LjsUxnnCM-IsnTDcHrg0ZXKkxysH6iM")
+api_key = os.environ.get("GEMINI_API_KEY")
+
+if not api_key:
+    raise ValueError("¡Falta la API Key! Configura la variable de entorno GEMINI_API_KEY.")
+
 client = genai.Client(api_key=api_key)
 
 # 2. Instrucciones
