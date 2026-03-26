@@ -1,0 +1,2 @@
+# PazienzAI
+AI-Week
