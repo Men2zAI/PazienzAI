@@ -7,7 +7,7 @@ from google.genai import types
 os.environ["GRADIO_THEME"] = "light"
 
 # 1. API Key segura
-api_key = os.environ.get("GEMINI_API_KEY")
+api_key = os.environ.get("GEMINI_API_KEY","PonTuAPIkey")
 
 if not api_key:
     raise ValueError("¡Falta la API Key! Configura la variable de entorno GEMINI_API_KEY.")
